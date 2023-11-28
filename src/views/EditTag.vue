@@ -7,9 +7,10 @@ export default {
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { Friend, FriendsResponse, getFriendsByGroupId, getTagsByGroupId, TagsByGroupIdResponse, updateTag } from "../api/botx"
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { getGroupIdFromRoute } from '@/utils/getGroupIdFromRoute';
 import { getTagIdFromRoute } from '@/utils/getTagIdFromRoute';
+import router from '@/router';
 
 const groupId = ref<string | null>(null)
 const route = useRoute()
@@ -110,9 +111,8 @@ const handleUpdateTag = async () => {
 
     // initialize
     await initializeGroupIdAndTagId(groupId.value)
-    const router = useRouter()
     confirm('Update Success')
-    router.push("manage-tag")
+    router.push("/manage-tag")
 
   } catch (error) {
     console.error("handleUpdateTag Error:", error)
