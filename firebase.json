@@ -3,29 +3,11 @@
     "public": "dist",
     "headers": [
       {
-        "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+        "source": "/**/!(*.*)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=0" 
-          }
-        ]
-      },
-      {
-        "source": "**/*.@(jpg|jpeg|gif|png)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=0" 
-          }
-        ]
-      },
-      {
-        "source": "**/*.@(css|js)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=0"
+            "value": "no-cache"
           }
         ]
       }

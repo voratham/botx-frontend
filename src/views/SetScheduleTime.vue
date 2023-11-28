@@ -106,7 +106,7 @@ const handleSetScheduleTime = async () => {
                     'bg-green-500': !loading,
                     'bg-gray-400' : loading,
                 }"
-                class="bg-green-500 text-white border rounded-md text-base font-bold p-2 my-5"
+                class="text-white border rounded-md text-base font-bold p-2 my-5"
                 @click="handleSetScheduleTime"
             >
                 {{ loading ?  'Loading...' : 'Update'}}
