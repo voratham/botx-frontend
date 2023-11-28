@@ -9,7 +9,7 @@ export default {
 import { onMounted, ref } from 'vue';
 import { getTagsByGroupId, TagsByGroupIdResponse } from "../api/botx"
 import { getGroupIdFromRoute } from "../utils/getGroupIdFromRoute"
-import { useRoute } from 'vue-router';
+import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 
 const tags = ref<TagsByGroupIdResponse[]>([])
 const groupId = ref<string | null>(null)
@@ -17,6 +17,7 @@ const groupId = ref<string | null>(null)
 const route = useRoute()
 const getGroupIdQuery = route.query["groupId"]
 const loading  = ref<boolean>(false)
+
 
 onMounted(async () => {
     loading.value =true

@@ -10,7 +10,6 @@ import { Friend, FriendsResponse, getFriendsByGroupId, getTagsByGroupId, TagsByG
 import { useRoute } from 'vue-router';
 import { getGroupIdFromRoute } from '@/utils/getGroupIdFromRoute';
 import { getTagIdFromRoute } from '@/utils/getTagIdFromRoute';
-import router from '@/router';
 
 const groupId = ref<string | null>(null)
 const route = useRoute()
@@ -112,8 +111,6 @@ const handleUpdateTag = async () => {
     // initialize
     await initializeGroupIdAndTagId(groupId.value)
     confirm('Update Success')
-    router.push("/manage-tag")
-
   } catch (error) {
     console.error("handleUpdateTag Error:", error)
     alert(error)
