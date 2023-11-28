@@ -112,7 +112,7 @@ const handleUpdateTag = async () => {
     await initializeGroupIdAndTagId(groupId.value)
     const router = useRouter()
     confirm('Update Success')
-    router.go(-1)
+    router.push("manage-tag")
 
   } catch (error) {
     console.error("handleUpdateTag Error:", error)
