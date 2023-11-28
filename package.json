@@ -1,17 +1,20 @@
 {
   "name": "botx-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 8080",
     "build": "vue-tsc && vite build",
     "preview": "rm -rf dist && vite preview",
-    "build:prod" : "vue-tsc && vite build && serve -s dist -l 8080"
+    "build:prod": "vue-tsc && vite build && serve -s dist -l 8080"
   },
   "dependencies": {
+    "@line/liff": "^2.22.4",
+    "axios": "^1.6.2",
     "vue": "^3.3.8",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",

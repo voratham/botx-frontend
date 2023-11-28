@@ -1,25 +1,35 @@
 <script setup lang="ts">
+import { onBeforeMount, ref } from "vue"
+import { liff } from "@line/liff"
 import { useRoute } from "vue-router";
-const route =  useRoute()
 
+const profile = ref<{
+  userId: string;
+    displayName: string;
+    pictureUrl?: string;
+    statusMessage?: string;
+} | undefined>(undefined);
+
+const route = useRoute()
+
+onBeforeMount( async () => {
+  await liff.init({ liffId: "2001520615-Gxa6gRaD"})
+  liff.ready.then(async () => {
+    const profileResp = await liff.getProfile()
+    profile.value = profileResp
+
+  })
+})
 </script>
 
 <template>  
-    <h1>BotXMain</h1>
-    router : {{ route.fullPath }}
-    <br/>
-    <router-link to="/register">Go to register</router-link>
-    <br/>
-    <router-link to="/setup-admin">Go to setup-admin</router-link>
-    <br/>
-    <router-link to="/manage-tag">Go to manage-tag</router-link>
-    <br/>
-    <router-link to="/summary-message">Go to summary-message</router-link>
-    <br/>
-    <hr/>
-    <router-view />
-    <hr>
-    <p>footer here</p>
+    <div v-if="profile && !route.fullPath.match(/history-message/)" class="profile flex flex-row px-4 py-2 items-center">
+      <img :src="profile?.pictureUrl" alt="avatar"  class="rounded-full w-[50px] h-[50px]"/>
+      <p class="text-base font-bold">{{profile?.displayName}}</p>
+    </div>
+    <section class="p-4">
+      <router-view/>
+    </section>
 </template>
 
 <style scoped>

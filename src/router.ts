@@ -1,6 +1,27 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
 
-export default createRouter({
+
+
+const manageTagRoutes: Array<RouteRecordRaw> = [
+    {
+        path: '',
+        name: 'manage-tag',
+        component: () => import('@/views/ManageTag.vue')
+    },
+    {
+        path: 'create',
+        name: 'manage-tag-create',
+        component: () => import('@/views/CreateTag.vue')
+    },
+    {
+        path: 'edit',
+        name: 'manage-tag-edit',
+        component: () => import('@/views/EditTag.vue')
+    }
+]
+
+
+const router = createRouter({
     history: createWebHistory("/"),
     routes: [
         {
@@ -16,12 +37,30 @@ export default createRouter({
         {
             path: '/manage-tag',
             name: 'manage-tag',
-            component: () => import('@/views/ManageTag.vue'),
+            children: manageTagRoutes,
         },
         {
-            path: '/summary-message',
-            name: 'summary-message',
-            component: () => import('@/views/SummaryMessage.vue'),
+            path: '/history-message',
+            name: 'history-message',
+            component: () => import('@/views/HistoryMessage.vue')
+        },
+        {
+            path: '/schedule-time',
+            name: 'schedule-time',
+            component: () => import('@/views/SetScheduleTime.vue')
         },
     ],
 })
+
+router.beforeEach((to, _, next) => {
+    const getQueryString = to.query['liff.state']
+    if (!Array.isArray(getQueryString)) {
+        const path = getQueryString?.toString()
+        if (path) {
+            next(path)
+        }
+    }
+    next()
+})
+
+export default router
